@@ -50,11 +50,15 @@
                   </div>
                   <div class="pd-desc">
                     <div v-html="productsDetails.description"></div>
-                    <h4>{{productsDetails.price}}</h4>
+                    <h4>${{productsDetails.price}}</h4>
                   </div>
                   <div class="quantity">
                     <router-link to="/cart">
-                      <a href="shopping-cart.html" class="primary-btn pd-cart">Add To Cart</a>
+                    <a
+                      @click="saveCart(productsDetails.id, productsDetails.name, productsDetails.price, productsDetails.galleries[0].photo)"
+                      href="#"
+                      class="primary-btn pd-cart"
+                    >Add To Cart</a>
                     </router-link>
                   </div>
                 </div>
@@ -90,8 +94,8 @@ export default {
   data() {
     return {
       gambar_default: "",
-      thumbs: [],
       productsDetails: [],
+      userCart: [],
     };
   },
   methods: {
@@ -103,8 +107,26 @@ export default {
       this.productsDetails = data;
       this.gambar_default = data.galleries[0].photo;
     },
+    saveCart(idProduct, nameProduct, priceProduct, photoProduct) {
+      var productStored = {
+        id: idProduct,
+        name: nameProduct,
+        price: priceProduct,
+        photo: photoProduct,
+      };
+      this.userCart.push(productStored);
+      const parsed = JSON.stringify(this.userCart);
+      localStorage.setItem("userCart", parsed);
+    },
   },
   mounted() {
+    if (localStorage.getItem("userCart")) {
+      try {
+        this.userCart = JSON.parse(localStorage.getItem("userCart"));
+      } catch (e) {
+        localStorage.removeItem("userCart");
+      }
+    }
     axios
       .get("http://127.0.0.1:8000/api/products", {
         params: {
