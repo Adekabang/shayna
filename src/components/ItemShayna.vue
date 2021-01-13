@@ -4,7 +4,12 @@
     <div class="container-fluid">
       <div class="row">
         <div class="col-lg-12 mt-5" v-if="products.length > 0">
-          <carousel class="product-slider" :nav="false" :dots="false" :autoplay="true">
+          <carousel
+            class="product-slider"
+            :nav="false"
+            :dots="false"
+            :autoplay="true"
+          >
             <div
               class="product-item"
               v-for="itemProduct in products"
@@ -15,14 +20,23 @@
                 <ul>
                   <li
                     class="w-icon active"
-                    @click="saveCart(itemProduct.id, itemProduct.name, itemProduct.price, itemProduct.galleries[0].photo)"
+                    @click="
+                      saveCart(
+                        itemProduct.id,
+                        itemProduct.name,
+                        itemProduct.price,
+                        itemProduct.galleries[0].photo
+                      )
+                    "
                   >
                     <a href="#">
                       <i class="icon_bag_alt"></i>
                     </a>
                   </li>
                   <li class="quick-view">
-                    <router-link :to="'/product/'+itemProduct.id">+ Quick View</router-link>
+                    <router-link :to="'/product/' + itemProduct.id"
+                      >+ Quick View</router-link
+                    >
                   </li>
                 </ul>
               </div>
@@ -74,7 +88,7 @@ export default {
       this.userCart.push(productStored);
       const parsed = JSON.stringify(this.userCart);
       localStorage.setItem("userCart", parsed);
-      window.location.reload()
+      window.location.reload();
     },
   },
   mounted() {
@@ -86,7 +100,7 @@ export default {
       }
     }
     axios
-      .get("http://127.0.0.1:8000/api/products")
+      .get("http://161.35.109.94/api/products")
       .then((res) => (this.products = res.data.data.data))
       .catch((err) => console.log(err));
   },

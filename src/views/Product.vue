@@ -28,14 +28,21 @@
                 <div class="product-pic-zoom">
                   <img class="product-big-img" :src="gambar_default" alt />
                 </div>
-                <div class="product-thumbs" v-if="productsDetails.galleries.length > 0">
-                  <carousel class="product-thumbs-track ps-slider" :dots="false" :nav="false">
+                <div
+                  class="product-thumbs"
+                  v-if="productsDetails.galleries.length > 0"
+                >
+                  <carousel
+                    class="product-thumbs-track ps-slider"
+                    :dots="false"
+                    :nav="false"
+                  >
                     <div
                       v-for="thumb in productsDetails.galleries"
                       :key="`img-${thumb.id}`"
                       class="pt"
                       @click="changeImage(thumb.photo)"
-                      :class="thumb.photo == gambar_default ? 'active': '' "
+                      :class="thumb.photo == gambar_default ? 'active' : ''"
                     >
                       <img :src="thumb.photo" alt />
                     </div>
@@ -45,20 +52,28 @@
               <div class="col-lg-6">
                 <div class="product-details text-left">
                   <div class="pd-title">
-                    <span>{{productsDetails.type}}</span>
-                    <h3>{{productsDetails.name}}</h3>
+                    <span>{{ productsDetails.type }}</span>
+                    <h3>{{ productsDetails.name }}</h3>
                   </div>
                   <div class="pd-desc">
                     <div v-html="productsDetails.description"></div>
-                    <h4>${{productsDetails.price}}</h4>
+                    <h4>${{ productsDetails.price }}</h4>
                   </div>
                   <div class="quantity">
                     <router-link to="/cart">
-                    <a
-                      @click="saveCart(productsDetails.id, productsDetails.name, productsDetails.price, productsDetails.galleries[0].photo)"
-                      href="#"
-                      class="primary-btn pd-cart"
-                    >Add To Cart</a>
+                      <a
+                        @click="
+                          saveCart(
+                            productsDetails.id,
+                            productsDetails.name,
+                            productsDetails.price,
+                            productsDetails.galleries[0].photo
+                          )
+                        "
+                        href="#"
+                        class="primary-btn pd-cart"
+                        >Add To Cart</a
+                      >
                     </router-link>
                   </div>
                 </div>
@@ -128,7 +143,7 @@ export default {
       }
     }
     axios
-      .get("http://127.0.0.1:8000/api/products", {
+      .get("http://161.35.109.94/api/products", {
         params: {
           id: this.$route.params.id,
         },

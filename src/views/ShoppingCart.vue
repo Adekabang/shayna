@@ -36,14 +36,17 @@
                       </tr>
                     </thead>
                     <tbody>
-                      <tr v-for="(cartItem, index) in userCart" :key="`itemCart-${cartItem.id}`">
+                      <tr
+                        v-for="(cartItem, index) in userCart"
+                        :key="`itemCart-${cartItem.id}`"
+                      >
                         <td class="cart-pic first-row">
                           <img class="img-cart" :src="cartItem.photo" />
                         </td>
                         <td class="cart-title first-row text-center">
-                          <h5>{{cartItem.name}}</h5>
+                          <h5>{{ cartItem.name }}</h5>
                         </td>
-                        <td class="p-price first-row">${{cartItem.price}}</td>
+                        <td class="p-price first-row">${{ cartItem.price }}</td>
                         <td class="delete-item" @click="removeItem(index)">
                           <a href="#">
                             <i class="material-icons">close</i>
@@ -116,7 +119,7 @@
                     </li>
                     <li class="subtotal mt-3">
                       Subtotal
-                      <span>${{totalHarga}}</span>
+                      <span>${{ totalHarga }}</span>
                     </li>
                     <li class="subtotal mt-3">
                       Pajak
@@ -124,7 +127,7 @@
                     </li>
                     <li class="subtotal mt-3">
                       Total Biaya
-                      <span>${{totalBiaya}}</span>
+                      <span>${{ totalBiaya }}</span>
                     </li>
                     <li class="subtotal mt-3">
                       Bank Transfer
@@ -140,7 +143,9 @@
                     </li>
                   </ul>
                   <!-- <router-link to="/success"> -->
-                    <a @click="checkout()" href="#" class="proceed-btn">I ALREADY PAID</a>
+                  <a @click="checkout()" href="#" class="proceed-btn"
+                    >I ALREADY PAID</a
+                  >
                   <!-- </router-link> -->
                 </div>
               </div>
@@ -187,17 +192,17 @@ export default {
       // });
 
       let checkoutData = {
-        "name": this.customerInfo.name,
-        "email": this.customerInfo.email,
-        "number": this.customerInfo.number,
-        "address": this.customerInfo.address,
-        "transaction_total": this.totalBiaya,
-        "transaction_status": "PENDING",
-        "transaction_details": [5,6]
-}
+        name: this.customerInfo.name,
+        email: this.customerInfo.email,
+        number: this.customerInfo.number,
+        address: this.customerInfo.address,
+        transaction_total: this.totalBiaya,
+        transaction_status: "PENDING",
+        transaction_details: [5, 6],
+      };
 
       axios
-        .post("http://127.0.0.1:8000/api/checkout", checkoutData)
+        .post("http://161.35.109.94/api/checkout", checkoutData)
         .then(() => this.$router.push("success"))
         .catch((err) => console.log(err));
     },
