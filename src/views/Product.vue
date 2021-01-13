@@ -143,7 +143,7 @@ export default {
       }
     }
     axios
-      .get("http://161.35.109.94/api/products", {
+      .get("https://161.35.109.94/api/products", {
         params: {
           id: this.$route.params.id,
         },

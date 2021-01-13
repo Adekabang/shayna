@@ -202,7 +202,7 @@ export default {
       };
 
       axios
-        .post("http://161.35.109.94/api/checkout", checkoutData)
+        .post("https://161.35.109.94/api/checkout", checkoutData)
         .then(() => this.$router.push("success"))
         .catch((err) => console.log(err));
     },
