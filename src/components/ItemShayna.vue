@@ -100,7 +100,7 @@ export default {
       }
     }
     axios
-      .get("https://161.35.109.94/api/products")
+      .get("http://161.35.109.94/api/products")
       .then((res) => (this.products = res.data.data.data))
       .catch((err) => console.log(err));
   },
